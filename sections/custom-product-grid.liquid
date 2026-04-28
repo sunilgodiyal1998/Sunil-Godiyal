@@ -1,0 +1,788 @@
+{% schema %}
+{
+  "name": "Custom Product Grid",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Product Item",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+  "type": "range",
+  "id": "icon_top",
+  "label": "Icon Top Position (%)",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "default": 50
+},
+{
+  "type": "range",
+  "id": "icon_left",
+  "label": "Icon Left Position (%)",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "default": 50
+},
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Custom Product Grid"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    padding: 250px 0px 200px 0;
+    max-width: 2800px;
+    margin: auto;
+}
+
+.grid-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.grid-item img {
+    width: 919.7779541015625px;
+    transition: 0.4s;
+    height: 943.1441040039062px;
+    object-fit: cover;
+}
+.grid-item:hover img {
+  transform: scale(1.05);
+}
+
+.plus-icon {
+    position: absolute;
+    background: #fff;
+    width: 57px;
+    height: 57px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 41px;
+}
+
+/* POPUP */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.popup-content {
+    background: #fff;
+    max-width: 960px;
+    width: 90%;
+    padding: 25px;
+    position: relative;
+}
+.popup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+/* FULL WIDTH SECOND ROW */
+.popup-bottom {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+}
+
+/* spacing */
+.popup-right {
+    padding-right: 10px;
+    padding-top: 58px;
+}
+
+h3#popup-title {
+    font-size: 42px;
+    margin-bottom: 45px;
+}
+.popup-left {
+    padding-top: 60px;
+}
+
+.popup-left img {
+    width: 100%;
+    height: 505px;
+    object-fit: cover;
+}
+.close-popup {
+    position: absolute;
+    top: 3px;
+    right: 30px;
+    font-size: 54px;
+    cursor: pointer;
+}
+
+#popup-price {
+    font-weight: 500;
+    margin: 10px 0;
+    font-size: 44px;
+    font-family: 'Jost';
+}
+
+#popup-desc {
+    font-size: 35px;
+    margin-bottom: 0;
+    color: #000;
+    font-weight: 300;
+    font-family: 'Jost';
+    line-height: 46px;
+    position: relative;
+    top: 34px;
+}
+
+/* OPTIONS */
+.option-group {
+  margin-bottom: 15px;
+}
+
+.option-group p {
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 35px;
+}
+
+/* COLOR BUTTONS */
+.color-buttons {
+  display: flex;
+  border: 1px solid #ccc;
+}
+
+.color-buttons button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: #f5f5f5;
+    cursor: pointer;
+    border-right: 1px solid #ccc;
+    border-left: 5px solid transparent;
+    text-align: left;
+    padding-left: 35px;
+    font-size: 30px;
+}
+
+.color-buttons button:last-child {
+  border-right: none;
+}
+
+.color-buttons button.active {
+  background: #000;
+  color: #fff;
+}
+
+/* SIZE DROPDOWN */
+#product-options select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 38px;
+    font-weight: 300 !IMPORTANT;
+    color: #000;
+    font-family: 'Jost';
+}
+
+/* BUTTON */
+.add-to-cart-btn {
+    width: 100%;
+    padding: 26px;
+    background: #000;
+    color: #fff;
+    border: none;
+    margin-top: 100px;
+    cursor: pointer;
+    font-size: 30px;
+    Position: relative;
+    margin-bottom: 35px;
+}
+.add-to-cart-btn::after {
+    content: "";
+    display: inline-block;
+    width: 64px;
+    height: 27px;
+    margin-left: 60px;
+    background-image: url("/cdn/shop/files/Line_15_1.png?v=1777315830");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.mobile-grid-heading{
+  display: none;
+}
+
+/* MOBILE GRID */
+@media(max-width:768px){
+
+  h2, h1 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+.grid-wrapper {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 8px; /* 👈 screenshot jaisa tight gap */
+  {% comment %} padding: 20px 12px 40px; {% endcomment %}
+  padding:16px 8px;
+}
+
+  .grid-item img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+  }
+
+  .plus-icon {
+    width: 21px;
+    height: 21px;
+    font-size: 18px;
+  }
+
+  .plus-icon {
+    top: 12px !important;
+    left: 62% !important;
+    transform: translateX(-50%) !important;
+  }
+
+}
+
+/* MOBILE: SAME AS DESKTOP POPUP */
+/* MOBILE: EXACT SAME POPUP LAYOUT LIKE DESKTOP */
+@media (max-width:768px){
+
+  .popup{
+    align-items: center;
+    justify-content: center;
+  }
+
+ .popup-content {
+    width: 311px;
+    max-width: 600px;
+    padding: 15px;
+    max-height: 447px;
+    overflow-y: auto;
+}
+
+  .popup-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 👈 SAME STRUCTURE */
+    gap: 0px;
+  }
+  .popup-bottom {
+    margin-top: 0px;
+}
+
+  /* TOP SECTION */
+  .popup-left{
+    padding-top: 0;
+  }
+
+.popup-left img {
+    width: 129px;
+    height: 178px;
+    object-fit: cover;
+}
+
+  .popup-right{
+    padding: 0;
+  }
+
+  #popup-title {
+    font-size: 16px !important;
+    margin-bottom: 16px !important;
+    font-weight: 300;
+}
+
+ #popup-price {
+    font-size: 14px;
+    margin: 16px 0;
+    margin-bottom: 8px;
+    color: black;
+    font-weight: 400;
+}
+
+  #popup-desc{
+    font-size: 12px;
+    line-height: 16px;
+    top: 0;
+  }
+
+  /* BOTTOM FULL WIDTH */
+  .popup-bottom{
+    grid-column: 1 / -1;
+  }
+
+  .option-group p{
+    font-size: 13px;
+  }
+
+  .color-buttons button{
+    font-size: 13px;
+    padding: 8px;
+    padding-left: 18px;
+  }
+
+  #product-options select{
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .add-to-cart-btn{
+    font-size: 14px;
+    padding: 12px;
+    margin-top: 20px;
+  }
+
+  .add-to-cart-btn::after{
+    width: 24px;
+    height: 10px;
+    margin-left: 8px;
+  }
+
+  .close-popup{
+    font-size: 22px;
+    right: 10px;
+    top: 5px;
+  }
+
+
+
+/* SHOW ONLY ON MOBILE */
+@media(max-width:768px){
+  .mobile-grid-heading{
+    display: block;
+    font-family: Lustria;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 120%;
+    letter-spacing: 0px;
+    text-align: center;
+    margin-bottom: 8px;
+    margin-top:35px;
+  }
+  .grid-item {
+    height:100% !important;
+}
+.grid-item img {
+height:100% !important
+}
+}
+
+}
+
+}
+
+
+{% comment %} today code {% endcomment %}
+ .option-group {
+  margin-top: 15px;
+  font-family: sans-serif;
+}
+
+.option-group p {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+/* Main box */
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+.select-items div:hover {
+    background: #000 !important;
+    color: #fff;
+}
+/* Closed select */
+.select-selected {
+  padding: 14px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Arrow */
+.select-selected::after {
+  content: "▾";
+  position: absolute;
+  right: 15px;
+}
+
+/* Dropdown */
+.select-items {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  border: 1px solid #ccc;
+  border-top: none;
+  background: #fff;
+
+  display: none;
+  z-index: 10;
+
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+/* Open state */
+.select-items.open {
+  display: block;
+}
+
+/* Items */
+.select-items div {
+    padding: 12px;
+    {% comment %} cursor: pointer; {% endcomment %}
+    {% comment %} background: red; {% endcomment %}
+}
+/* Hover */
+.select-items div:hover {
+  background: #eee;
+}
+
+/* Selected (black highlight like image) */
+.select-items div.selected {
+  background: #000;
+  color: #fff;
+}
+
+/* COLOR BUTTON HOVER */
+.color-buttons button:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ACTIVE (SELECTED) BUTTON */
+.color-buttons button.active {
+  background: #000;
+  color: #fff;
+  text-align: center !important;   /* center text */
+  padding-left: 0 !important;      /* remove left shift */
+  border-left: none !important;    /* remove color bar */
+}
+
+/* DROPDOWN TEXT CENTER */
+#product-options select {
+  text-align: center;
+  text-align-last: center; /* important for dropdown */
+}
+
+/* HOVER STATE */
+.color-buttons button:hover {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* ACTIVE (SELECTED) STATE */
+.color-buttons button.active {
+  background: #000 !important;
+  color: #fff !important;
+  text-align: center !important;
+  padding-left: 0 !important;
+  border-left: none !important;
+}
+</style>
+
+<h2 class="mobile-grid-heading">Tisso vison in the wild</h2>
+<div class="grid-wrapper">
+{% for block in section.blocks %}
+  {% assign product = block.settings.product %}
+  {% if product %}
+    <div class="grid-item"
+      data-title="{{ product.title }}"
+      data-img="{{ product.featured_image | image_url }}"
+      data-price="{{ product.price | money }}"
+      data-desc="{{ product.description | strip_html | truncate: 120 }}"
+      data-variants='{{ product.variants | json }}'>
+
+      <img src="{{ product.featured_image | image_url }}">
+<div class="plus-icon"
+     style="top: {{ block.settings.icon_top }}%; left: {{ block.settings.icon_left }}%; transform: translate(-50%, -50%);">
+  +
+</div>
+    </div>
+  {% endif %}
+{% endfor %}
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+
+    <span class="close-popup">&times;</span>
+
+    <div class="popup-grid">
+
+      <!-- ROW 1 -->
+      <div class="popup-left">
+        <img id="popup-img">
+      </div>
+
+      <div class="popup-right">
+        <h3 id="popup-title"></h3>
+        <p id="popup-price"></p>
+        <div id="popup-desc"></div>
+      </div>
+
+      <!-- ROW 2 (FULL WIDTH) -->
+      <div class="popup-bottom">
+        <div id="product-options"></div>
+
+        <button id="add-to-cart-btn" class="add-to-cart-btn">
+          ADD TO CART 
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+let selectedVariantId = null;
+let variantsData = [];
+let colorIndex = 1;
+let sizeIndex = 2;
+
+// OPEN POPUP
+document.querySelectorAll('.grid-item').forEach(item => {
+  item.onclick = function() {
+    document.getElementById('popup').style.display = 'flex';
+
+    document.getElementById('popup-img').src = this.dataset.img;
+    document.getElementById('popup-title').innerText = this.dataset.title;
+    document.getElementById('popup-desc').innerText = this.dataset.desc;
+
+    variantsData = JSON.parse(this.dataset.variants);
+
+    detectOptions();
+    renderOptions();
+  };
+});
+
+// 🔥 DETECT COLOR & SIZE INDEX
+function detectOptions() {
+  const optionKeys = ['option1','option2','option3'];
+
+  colorIndex = null;
+  sizeIndex = null;
+
+  optionKeys.forEach((key, i) => {
+    let values = variantsData.map(v => (v[key] || '').toLowerCase());
+
+    if (values.some(v => ['black','white','red','blue','green','yellow','pink','grey','brown'].some(c => v.includes(c)))) {
+      colorIndex = i + 1;
+    }
+
+    if (values.some(v => ['xs','s','m','l','xl','xxl','small','medium','large'].includes(v))) {
+      sizeIndex = i + 1;
+    }
+  });
+
+  if (!colorIndex) colorIndex = 1;
+  if (!sizeIndex) sizeIndex = 2;
+}
+
+// 🎨 RENDER OPTIONS
+function renderOptions() {
+  const container = document.getElementById('product-options');
+  container.innerHTML = '';
+
+  if (!variantsData.length) return;
+
+  // 👉 COLORS
+  let colors = [...new Set(variantsData.map(v => v['option'+colorIndex]).filter(Boolean))];
+
+  if (colors.length) {
+    let wrap = document.createElement('div');
+    wrap.classList.add('option-group');
+    wrap.innerHTML = `<p>Color</p>`;
+
+    let btnWrap = document.createElement('div');
+    btnWrap.classList.add('color-buttons');
+
+    colors.forEach((color, index) => {
+      let btn = document.createElement('button');
+      btn.innerText = color;
+      btn.dataset.value = color;
+
+      // 🎨 COLOR MAP
+      let colorMap = {
+        black: '#000',
+        white: '#ddd',
+        red: 'red',
+        blue: 'blue',
+        green: 'green',
+        yellow: 'gold',
+        pink: 'pink',
+        grey: 'grey',
+        gray: 'grey',
+        brown: 'brown'
+      };
+
+      let clr = color.toLowerCase();
+
+      // APPLY LEFT BORDER COLOR
+      btn.style.borderLeft = `5px solid ${colorMap[clr] || clr}`;
+
+      // AUTO SELECT FIRST
+      if (index === 0) btn.classList.add('active');
+
+      btn.onclick = function() {
+        document.querySelectorAll('.color-buttons button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        updateVariant();
+      };
+
+      btnWrap.appendChild(btn);
+    });
+
+    wrap.appendChild(btnWrap);
+    container.appendChild(wrap);
+  }
+
+  // 👉 SIZE DROPDOWN
+  let sizes = [...new Set(variantsData.map(v => v['option'+sizeIndex]).filter(Boolean))];
+
+  {% comment %} if (sizes.length) {
+    let wrap = document.createElement('div');
+    wrap.classList.add('option-group');
+    wrap.innerHTML = `<p>Size</p>`;
+
+    let select = document.createElement('select');
+    select.innerHTML = `<option value="">Choose your size</option>`;
+
+    sizes.forEach(size => {
+      let opt = document.createElement('option');
+      opt.value = size;
+      opt.text = size;
+      select.appendChild(opt);
+    });
+
+    select.onchange = updateVariant;
+
+    wrap.appendChild(select);
+    container.appendChild(wrap);
+  } {% endcomment %}
+ if (sizes.length) {
+  let wrap = document.createElement('div');
+  wrap.classList.add('option-group');
+  wrap.innerHTML = `<p>Size</p>`;
+
+  let dropdown = document.createElement('div');
+  dropdown.classList.add('custom-select');
+
+  let selected = document.createElement('div');
+  selected.classList.add('select-selected');
+  selected.innerText = 'Choose your size';
+
+  let list = document.createElement('div');
+  list.classList.add('select-items');
+
+  sizes.forEach(size => {
+    let item = document.createElement('div');
+    item.innerText = size;
+
+    item.onclick = function () {
+      selected.innerText = size;
+
+      // trigger your existing function
+      updateVariant({ target: { value: size } });
+
+      list.classList.remove('open');
+    };
+
+    list.appendChild(item);
+  });
+
+  selected.onclick = function () {
+    list.classList.toggle('open');
+  };
+
+  dropdown.appendChild(selected);
+  dropdown.appendChild(list);
+  wrap.appendChild(dropdown);
+  container.appendChild(wrap);
+}
+  updateVariant();
+}
+
+// 🔄 UPDATE VARIANT
+function updateVariant() {
+  let selectedColor = document.querySelector('.color-buttons .active')?.dataset.value;
+  let selectedSize = document.querySelector('#product-options select')?.value;
+
+  let matched = variantsData.find(v => {
+    return (!selectedColor || v['option'+colorIndex] === selectedColor) &&
+           (!selectedSize || v['option'+sizeIndex] === selectedSize);
+  });
+
+  if (matched) {
+    selectedVariantId = matched.id;
+    document.getElementById('popup-price').innerText =
+      '₹' + (matched.price / 100).toFixed(2);
+  }
+}
+
+// ❌ CLOSE POPUP
+document.querySelector('.close-popup').onclick = () => {
+  document.getElementById('popup').style.display = 'none';
+};
+
+window.onclick = (e) => {
+  if (e.target.id === 'popup') {
+    document.getElementById('popup').style.display = 'none';
+  }
+};
+
+// 🛒 ADD TO CART
+document.getElementById('add-to-cart-btn').onclick = function() {
+  if (!selectedVariantId) {
+    alert('Please select options');
+    return;
+  }
+
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      items: [
+        {
+          id: selectedVariantId,
+          quantity: 1
+        }
+      ]
+    })
+  })
+  .then(() => {
+    window.location.href = '/cart';
+  })
+  .catch(err => console.error(err));
+};
+</script>
