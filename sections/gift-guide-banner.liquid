@@ -1,11 +1,11 @@
 {% stylesheet %}
 
-/* ===== HIDE MOBILE LAYOUT BY DEFAULT ===== */
+
 .gift-mobile-only {
   display: none;
 }
 
-/* ===== SECTION 1 (IMAGE) ===== */
+
 .gift-hero {
     width: 100%;
     height: 1065px;
@@ -15,12 +15,11 @@
     position: relative;
 }
 
-/* BUTTON OVER IMAGE */
+
 .gift-hero__btn-wrap {
   display: none;
 }
 
-/* ===== SECTION 2 ===== */
 .gift-banner {
   position: relative;
   width: 100%;
@@ -72,7 +71,6 @@
     z-index: 1;
 }
 
-/* ARROW */
 .gift-banner__btn::before {
     content: '';
     position: absolute;
@@ -86,7 +84,6 @@
     z-index: 2;
 }
 
-/* HOVER OVERLAY */
 .gift-banner__btn::after {
     content: '';
     position: absolute;
@@ -100,23 +97,19 @@
     color: #000 !important;
 }
 
-/* HOVER ACTION */
 .gift-banner__btn:hover::after {
     width: 100%;
 }
 
-/* TEXT COLOR CHANGE */
 .gift-banner__btn:hover {
     color: black;
 }
 
-/* IMAGE */
 .gift-banner__image img {
     width: 100%;
     height: 1072px;
 }
 
-/* BOTTOM */
 .gift-banner__bottom {
     text-align: center;
     padding: 15px;
@@ -210,7 +203,6 @@
   }
 }
 
-/* ================= 769–1279 ================= */
 @media (min-width: 769px) and (max-width: 1279px) {
 
   .gift-hero { height: 600px; }
@@ -252,7 +244,6 @@
   }
 }
 
-/* ================= 1280–1920 (MERGED CLEAN) ================= */
 @media (min-width: 1280px) and (max-width: 1920px) {
 
   .gift-hero { height: 700px; }
@@ -294,7 +285,6 @@
   }
 }
 
-/* ================= 1921–2850 ================= */
 @media (min-width: 1921px) and (max-width: 2850px) {
 
   .gift-hero { 
@@ -355,7 +345,6 @@
     <p class="gift-mobile-text">{{ section.settings.text }}</p>
   </div>
 
-  <!-- IMAGE WITH BUTTON -->
   <div class="gift-mobile-image">
     {% if section.settings.top_image != blank %}
               <img src="{{ section.settings.image | image_url: width: 1500 }}" alt="">
@@ -370,7 +359,6 @@
     </div>
   </div>
 
-  <!-- BOTTOM -->
   <div class="gift-mobile-bottom">
     {{ section.settings.bottom_text }}
   </div>
