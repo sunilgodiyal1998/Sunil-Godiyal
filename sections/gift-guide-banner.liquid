@@ -8,7 +8,7 @@
 /* ===== SECTION 1 (IMAGE) ===== */
 .gift-hero {
     width: 100%;
-    height: clamp(600px, 55vw, 1065px);
+    height: 1065px;
     background-size: cover;
     background-position: left;
     background-repeat: no-repeat;
@@ -29,11 +29,11 @@
 
 .gift-banner__inner {
     margin: 0 auto;
-    padding: 0px clamp(20px, 4vw, 80px);
+    padding: 0px 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: clamp(60px, 12vw, 370px);
+    padding-left: 370px;
 }
 
 .gift-banner__content {
@@ -42,45 +42,64 @@
 
 .gift-banner__title {
     font-family: Jost;
-    font-size: clamp(48px, 8vw, 164.78px);
+    font-size: 164.78px;
     font-weight: 500;
-    margin-bottom: clamp(30px, 5vw, 100px);
+    margin-bottom: 100px;
     color: #000;
 }
 
 .gift-banner__text {
     font-family: Jost;
-    font-size: clamp(18px, 2.5vw, 47.08px);
-    margin-bottom: clamp(30px, 6vw, 118px);
+    font-size: 47.08px;
+    margin-bottom: 118px;
     color: #444;
 }
+
+/* .gift-banner__btn {
+    display: inline-flex;
+    align-items: center;
+    background: #000;
+    color: #fff;
+    padding: 33.56px 56.64px 33.56px 129.64px;
+    text-decoration: none;
+    font-size: 37.66px;
+    position: relative;
+}
+
+.gift-banner__btn::after {
+    content: "";
+    width: 64px;
+    height: 27px;
+    margin-left: 70px;
+    background-image: url("/cdn/shop/files/Line_15_1.png?v=1777315830");
+    background-size: contain;
+    background-repeat: no-repeat;
+} */
 
 .gift-banner__btn {
     background: #000;
     color: #ffffff;
     font-family: Jost;
-    font-size: clamp(16px, 2vw, 42.67px);
+    font-size: 42.67px;
     line-height: 54.61px;
     text-transform: uppercase;
-    padding: clamp(14px, 2vw, 33.56px)
-             clamp(60px, 10vw, 185.64px)
-             clamp(14px, 2vw, 33.56px)
-             clamp(40px, 7vw, 129.64px);
+    padding: 33.56px 185.64px 33.56px 129.64px;
     text-decoration: none;
     position: relative;
     overflow: hidden;
     z-index: 1;
 }
 
+
 /* ARROW */
 .gift-banner__btn::before {
     content: '';
     position: absolute;
-    right: clamp(20px, 3vw, 50px);
+    right: 50px;
     top: 50%;
     transform: translateY(-50%);
-    width: clamp(30px, 3vw, 64px);
-    height: clamp(12px, 1.5vw, 27px);
+    width: 64px;
+    height: 27px;
     background: url('/cdn/shop/files/Line_15_1.png?v=1777315830') no-repeat center;
     background-size: contain;
     z-index: 2;
@@ -94,7 +113,7 @@
     top: 0;
     width: 0%;
     height: 100%;
-    background: #FFF544;
+    background: #FFF544; /* hover color */
     transition: width 0.4s ease;
     z-index: -1;
     color: #000 !important;
@@ -117,40 +136,42 @@
 /* IMAGE */
 .gift-banner__image img {
     width: 100%;
-    height: clamp(500px, 55vw, 1072px);
+    height: 1072px;
 }
 
 /* BOTTOM */
 .gift-banner__bottom {
     text-align: center;
-    padding: clamp(10px, 1.5vw, 15px);
-    font-size: clamp(14px, 2vw, 42.67px);
+    padding: 15px;
+    font-size: 42.67px;
     background: #f5f5f5;
 }
 
 /* ================= MOBILE EXACT DESIGN ================= */
 @media (max-width: 768px) {
 
+  /* SHOW MOBILE */
   .gift-mobile-only {
     display: block;
   }
 
+  /* HIDE DESKTOP */
   .gift-hero,
   .gift-banner {
     display: none;
   }
 
-  .gift-mobile-top {
+  /* TEXT ABOVE IMAGE */
+.gift-mobile-top {
     text-align: center;
+    /* padding: 30px 20px 10px; */
     padding: 16px 8px;
-  }
-
-  .gift-mobile-title {
+}
+ .gift-mobile-title {
     font-size: 30px;
     font-weight: 500;
     margin-bottom: 16px;
-  }
-
+}
   .gift-mobile-text {
     font-size: 16px;
     line-height: 130%;
@@ -158,19 +179,22 @@
     margin: 0 auto 16px;
     color:black;
     font-weight:400;
-  }
+}
 
+  /* IMAGE BLOCK */
   .gift-mobile-image {
     position: relative;
   }
 
-  .gift-mobile-image img {
+ .gift-mobile-image img {
     width: 100%;
     height: 264px;
     display: block;
+    /* margin-left: -116px; */
     object-fit: cover;
-  }
+}
 
+  /* BUTTON OVER IMAGE */
   .gift-hero__btn-wrap {
     display: flex;
     position: absolute;
@@ -179,7 +203,7 @@
     transform: translateX(-50%);
   }
 
-  .gift-mobile-btn {
+.gift-mobile-btn {
     background: #000;
     color: #fff;
     padding: 14px 19px;
@@ -189,7 +213,7 @@
     align-items: center;
     font-weight: 400;
     line-height: 20.48px;
-  }
+}
 
   .gift-mobile-btn::after {
     content: "";
@@ -201,17 +225,62 @@
     background-repeat: no-repeat;
   }
 
-  .gift-mobile-bottom {
+  /* BOTTOM TEXT */
+.gift-mobile-bottom {
     text-align: center;
     padding: 15px;
     font-size: 14px;
     font-weight: 400;
     background: #f5f5f5;
+    /* letter-spacing: 1px; */
     line-height: 13.46px;
     color: black !important;
+}
+
+}
+@media (min-width: 1280px) and (max-width: 1920px) {
+
+  .gift-hero {
+    height: 700px;
+  }
+
+  .gift-banner__inner {
+    padding-left: 120px;
+    padding-right: 60px;
+  }
+
+  .gift-banner__title {
+    font-size: 90px;
+    margin-bottom: 50px;
+  }
+
+  .gift-banner__text {
+    font-size: 24px;
+    margin-bottom: 60px;
+  }
+
+  .gift-banner__btn {
+    font-size: 20px;
+    padding: 20px 120px 20px 60px;
+  }
+
+  .gift-banner__btn::before {
+    width: 40px;
+    height: 16px;
+    right: 30px;
+  }
+
+  .gift-banner__image img {
+    height: 700px;
+  }
+
+  .gift-banner__bottom {
+    font-size: 20px;
+    padding: 12px;
   }
 
 }
+
 
 {% endstylesheet %}
 
