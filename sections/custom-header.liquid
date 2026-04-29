@@ -38,7 +38,7 @@
 
 /* BUTTON */
 a.custom-header-btn {
-    background: #ff4444ff;
+    background: #FFF544;
     color: black;
     font-family: Jost;
     font-size: 42.67px;
@@ -189,45 +189,6 @@ a.custom-header-btn::before {
   text-decoration: none;
   font-size: 20px;
   color: #000;
-}
-
-/* ================= HD & LAPTOP SCREENS FIX ================= */
-@media (min-width: 1280px) and (max-width: 1920px) {
-
-  .custom-header-inner {
-    max-width: 1440px; /* keep layout controlled */
-    padding: 0 80px; /* reduce side spacing */
-    height: 110px; /* smaller height */
-  }
-
-  /* LOGO */
-  .custom-header-logo img {
-    max-height: 45px;
-  }
-
-  .custom-header-logo span {
-    font-size: 28px;
-  }
-
-  /* CENTER TEXT */
-  .custom-header-text {
-    font-size: 28px;
-    line-height: 30px;
-  }
-
-  /* BUTTON */
-  a.custom-header-btn {
-    font-size: 20px;
-    line-height: 24px;
-    padding: 16px 60px;
-  }
-
-  /* arrow size adjust */
-  a.custom-header-btn::before {
-    width: 40px;
-    height: 18px;
-    right: 20px;
-  }
 }
 {% endstylesheet %}
 
