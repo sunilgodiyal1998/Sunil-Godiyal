@@ -59,22 +59,22 @@ a.custom-header-btn::after {
     top: 0;
     width: 0%;
     height: 100%;
-    background: black; /* hover color */
+    background: black;
     transition: width 0.4s ease;
     z-index: -1;
 }
 
-/* hover effect */
+/* hover */
 a.custom-header-btn:hover::after {
     width: 100%;
 }
 
-/* optional: text color change */
 a.custom-header-btn:hover {
     color: white;
-        z-index: 1;
-
+    z-index: 1;
 }
+
+/* arrow */
 a.custom-header-btn::before {
     content: '';
     position: absolute;
@@ -87,6 +87,7 @@ a.custom-header-btn::before {
     background-size: contain;
     z-index: 2;
 }
+
 /* HIDE MOBILE ICON ON DESKTOP */
 .mobile-menu-toggle {
   display: none;
@@ -104,7 +105,6 @@ a.custom-header-btn::before {
     position: relative;
   }
 
-  /* SHOW HAMBURGER */
   .mobile-menu-toggle {
     display: block !important;
     font-size: 18px;
@@ -114,93 +114,72 @@ a.custom-header-btn::before {
     z-index: 5;
   }
 
-  /* CENTER LOGO */
   .custom-header-logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
     top: 34%;
-}
-
+  }
 
   .custom-header-logo img {
     max-height: 20px;
     width: 151.44px;
     height: 19px;
-}
+  }
 
   .custom-header-logo span {
     font-size: 26px;
   }
 
-  /* HIDE TEXT + BUTTON */
   .custom-header-text,
   .custom-header-btn {
     display: none !important;
   }
 }
 
-/* REMOVE OLD BREAKPOINT ISSUE */
-@media (max-width: 1024px) {
+/* ================= 769–1279 ================= */
+@media (min-width: 769px) and (max-width: 1279px) {
+
   .custom-header-inner {
-    grid-template-columns: auto 1fr auto;
+    padding: 0 40px;
+    height: 90px;
+  }
+
+  .custom-header-logo img {
+    max-height: 40px;
+  }
+
+  .custom-header-logo span {
+    font-size: 22px;
+  }
+
+  .custom-header-text {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  a.custom-header-btn {
+    font-size: 16px;
+    padding: 12px 40px;
+  }
+
+  a.custom-header-btn::before {
+    width: 28px;
+    height: 12px;
+    right: 15px;
   }
 }
 
-/* DRAWER */
-.mobile-drawer {
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: 80%;
-  height: 100%;
-  background: #fff;
-  z-index: 9999;
-  transition: 0.3s ease;
-}
-
-.mobile-drawer.active {
-  left: 0;
-}
-
-.drawer-content {
-  padding: 30px;
-}
-
-.close-btn {
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
-
-.mobile-menu {
-  list-style: none;
-  padding: 0;
-}
-
-.mobile-menu li {
-  margin-bottom: 15px;
-}
-
-.mobile-menu a {
-  text-decoration: none;
-  font-size: 20px;
-  color: #000;
-}
-
-/* ================= HD & LAPTOP SCREENS FIX ================= */
+/* ================= 1280–1920 (CLEAN MERGED) ================= */
 @media (min-width: 1280px) and (max-width: 1920px) {
 
   .custom-header-inner {
-    max-width: 1440px; /* keep layout controlled */
-    padding: 0 80px; /* reduce side spacing */
-    height: 110px; /* smaller height */
+    max-width: 1440px;
+    padding: 0 80px;
+    height: 110px;
   }
 
-  /* LOGO */
   .custom-header-logo img {
     max-height: 45px;
   }
@@ -209,26 +188,57 @@ a.custom-header-btn::before {
     font-size: 28px;
   }
 
-  /* CENTER TEXT */
   .custom-header-text {
     font-size: 28px;
     line-height: 30px;
   }
 
-  /* BUTTON */
   a.custom-header-btn {
     font-size: 20px;
-    line-height: 24px;
     padding: 16px 60px;
   }
 
-  /* arrow size adjust */
   a.custom-header-btn::before {
     width: 40px;
     height: 18px;
     right: 20px;
   }
 }
+
+/* ================= 1921–2850 ================= */
+@media (min-width: 1921px) and (max-width: 2850px) {
+
+  .custom-header-inner {
+    max-width: 2200px;
+    padding: 0 200px;
+    height: 200px;
+  }
+
+  .custom-header-logo img {
+    max-height: 70px;
+  }
+
+  .custom-header-logo span {
+    font-size: 50px;
+  }
+
+  .custom-header-text {
+    font-size: 50px;
+    line-height: 55px;
+  }
+
+  a.custom-header-btn {
+    font-size: 48px;
+    padding: 40px 160px;
+  }
+
+  a.custom-header-btn::before {
+    width: 80px;
+    height: 34px;
+    right: 40px;
+  }
+}
+
 {% endstylesheet %}
 
 
