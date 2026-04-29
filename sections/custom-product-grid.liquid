@@ -203,8 +203,6 @@ h3#popup-title {
     color: #000;
     font-family: 'Jost';
 }
-
-/* BUTTON */
 .add-to-cart-btn {
     width: 100%;
     padding: 26px;
@@ -268,8 +266,6 @@ h3#popup-title {
 
 }
 
-/* MOBILE: SAME AS DESKTOP POPUP */
-/* MOBILE: EXACT SAME POPUP LAYOUT LIKE DESKTOP */
 @media (max-width:768px){
 
   .popup{
@@ -368,8 +364,6 @@ h3#popup-title {
   }
 
 
-
-/* SHOW ONLY ON MOBILE */
 @media(max-width:768px){
   .mobile-grid-heading{
     display: block;
@@ -398,8 +392,6 @@ height:100% !important
 
 }
 
-
-{% comment %} today code {% endcomment %}
  .option-group {
   margin-top: 15px;
   font-family: sans-serif;
@@ -412,7 +404,6 @@ height:100% !important
 .custom-select div {
     font-size: 36px;
 }
-/* Main box */
 .custom-select {
   position: relative;
   width: 100%;
@@ -421,7 +412,7 @@ height:100% !important
     background: #000 !important;
     color: #fff;
 }
-/* Closed select */
+
 .select-selected {
     padding: 14px;
     border: 1px solid #000;
@@ -431,14 +422,12 @@ height:100% !important
     color: black;
 }
 
-/* Arrow */
 .select-selected::after {
   content: "▾";
   position: absolute;
   right: 15px;
 }
 
-/* Dropdown */
 .select-items {
   position: absolute;
   top: 100%;
@@ -456,50 +445,43 @@ height:100% !important
   overflow-y: auto;
 }
 
-/* Open state */
 .select-items.open {
   display: block;
 }
 
-/* Items */
 .select-items div {
     padding: 12px;
     {% comment %} cursor: pointer; {% endcomment %}
     {% comment %} background: red; {% endcomment %}
 }
-/* Hover */
+
 .select-items div:hover {
   background: #eee;
 }
 
-/* Selected (black highlight like image) */
 .select-items div.selected {
   background: #000;
   color: #fff;
 }
 
-/* COLOR BUTTON HOVER */
 .color-buttons button:hover {
   background: #000;
   color: #fff;
 }
 
-/* ACTIVE (SELECTED) BUTTON */
 .color-buttons button.active {
   background: #000;
   color: #fff;
-  text-align: center !important;   /* center text */
-  padding-left: 0 !important;      /* remove left shift */
-  border-left: none !important;    /* remove color bar */
+  text-align: center !important;   
+  padding-left: 0 !important;      
+  border-left: none !important;    
 }
 
-/* DROPDOWN TEXT CENTER */
 #product-options select {
   text-align: center;
-  text-align-last: center; /* important for dropdown */
+  text-align-last: center; 
 }
 
-/* HOVER STATE */
 .color-buttons button:hover {
   background: #000 !important;
   color: #fff !important;
@@ -853,7 +835,7 @@ document.querySelectorAll('.grid-item').forEach(item => {
   };
 });
 
-// 🔥 DETECT COLOR & SIZE INDEX
+// DETECT COLOR & SIZE INDEX
 function detectOptions() {
   const optionKeys = ['option1','option2','option3'];
 
@@ -876,14 +858,14 @@ function detectOptions() {
   if (!sizeIndex) sizeIndex = 2;
 }
 
-// 🎨 RENDER OPTIONS
+// RENDER OPTIONS
 function renderOptions() {
   const container = document.getElementById('product-options');
   container.innerHTML = '';
 
   if (!variantsData.length) return;
 
-  // 👉 COLORS
+  // COLORS
   let colors = [...new Set(variantsData.map(v => v['option'+colorIndex]).filter(Boolean))];
 
   if (colors.length) {
@@ -934,7 +916,7 @@ function renderOptions() {
     container.appendChild(wrap);
   }
 
-  // 👉 SIZE DROPDOWN
+  //  SIZE DROPDOWN
   let sizes = [...new Set(variantsData.map(v => v['option'+sizeIndex]).filter(Boolean))];
 
   {% comment %} if (sizes.length) {
@@ -1000,7 +982,7 @@ function renderOptions() {
   updateVariant();
 }
 
-// 🔄 UPDATE VARIANT
+// UPDATE VARIANT
 function updateVariant() {
   let selectedColor = document.querySelector('.color-buttons .active')?.dataset.value;
   let selectedSize = document.querySelector('#product-options select')?.value;
@@ -1017,7 +999,7 @@ function updateVariant() {
   }
 }
 
-// ❌ CLOSE POPUP
+// CLOSE POPUP
 document.querySelector('.close-popup').onclick = () => {
   document.getElementById('popup').style.display = 'none';
 };
