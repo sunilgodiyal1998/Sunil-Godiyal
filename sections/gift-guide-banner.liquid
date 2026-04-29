@@ -54,8 +54,9 @@
     margin-bottom: 118px;
     color: #444;
 }
-a.gift-banner__btn:hover {
-    padding: 35px 110px 31px 55px;
+.gift-banner__btn {
+  display: inline-block;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 .gift-banner__btn {
     background: #000;
@@ -379,7 +380,7 @@ a.gift-banner__btn:hover {
 </div>
 
 
-<!-- ================= DESKTOP (UNCHANGED) ================= -->
+
 <div class="gift-hero"
   style="background-image: url({{ section.settings.top_image | image_url: width: 3840 }});">
 </div>
@@ -465,4 +466,3 @@ a.gift-banner__btn:hover {
 }
 {% endschema %}
 
-{% comment %} i only want 1 background image {% endcomment %}
