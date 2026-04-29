@@ -294,40 +294,50 @@
 /* ================= 1921–2850 ================= */
 @media (min-width: 1921px) and (max-width: 2850px) {
 
-  .gift-hero { height: 1200px; }
+  .gift-hero { 
+    height: 1000px; /* reduced from 1200 */
+  }
 
   .gift-banner__inner {
-    padding-left: 420px;
-    padding-right: 120px;
+    padding-left: 220px;   /* was 420 → too much */
+    padding-right: 80px;
+    max-width: 2200px;     /* keeps layout centered */
+  }
+
+  .gift-banner__content {
+    width: 50%;
   }
 
   .gift-banner__title {
-    font-size: 180px;
-    margin-bottom: 120px;
+    font-size: 140px;      /* reduced from 180 */
+    margin-bottom: 80px;
   }
 
   .gift-banner__text {
-    font-size: 54px;
-    margin-bottom: 140px;
+    font-size: 40px;       /* reduced from 54 */
+    margin-bottom: 90px;
   }
 
   .gift-banner__btn {
-    font-size: 48px;
-    padding: 40px 220px 40px 150px;
+    font-size: 34px;
+    padding: 30px 160px 30px 100px;
   }
 
   .gift-banner__btn::before {
-    width: 80px;
-    height: 34px;
-    right: 70px;
+    width: 60px;
+    height: 24px;
+    right: 40px;
   }
 
-  .gift-banner__image img { height: 1200px; }
+  .gift-banner__image img { 
+    height: 1000px;
+  }
 
   .gift-banner__bottom {
-    font-size: 48px;
-    padding: 20px;
+    font-size: 34px;
+    padding: 18px;
   }
+
 }
 
 {% endstylesheet %}
